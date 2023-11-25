@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "965669124582",
+    "project_id": "datenow-fc53f",
+    "storage_bucket": "datenow-fc53f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965669124582:android:d6a0a5bb4942fb1fac3e27",
+        "android_client_info": {
+          "package_name": "com.example.date_now"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxCCnm4_H1ZLwUwbIcNb_mG49gAGSoTW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Date_Now" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/laal</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+
+    </style>
+
+
+
+    <style name="Theme.Date_Now" parent="Base.Theme.Date_Now" />
+</resources>

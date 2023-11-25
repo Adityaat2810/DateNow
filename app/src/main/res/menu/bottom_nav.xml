@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@id/datingFragment"
+        android:title="DATING"
+        android:icon="@drawable/baseline_home_24"/>
+
+
+    <item android:id="@id/chatFragment"
+        android:title="Matches"
+        android:icon="@drawable/baseline_message_24"/>
+
+
+    <item android:id="@id/profileFragment"
+        android:title="PROFILE"
+        android:icon="@drawable/baseline_person_24"/>
+
+
+
+</menu>

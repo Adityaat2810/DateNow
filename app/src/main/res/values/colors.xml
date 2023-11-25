@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="laal">#FB3640</color>
+
+ <color name="dark_neela">#0A2463</color>
+    <color name="gery">#605F5E</color>
+    <color name="sky_blue">#247BA0</color>
+    <color name="dark_safed">#E2E2E2</color>
+
+
+
+
+
+
+</resources>
