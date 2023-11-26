@@ -2,9 +2,11 @@ package com.example.date_now.auth
 
 import android.content.Intent
 import android.net.Uri
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -40,10 +42,30 @@ class registration : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        binding.nextFields.setOnClickListener {
+
+            validateData()
+        }
+
         binding.register.setOnClickListener {
             binding.register.startAnimation()
-            validateData()
+            validateSecondaryData()
 
+        }
+    }
+
+    private fun validateSecondaryData() {
+        if(binding.userNumber.text.toString().isEmpty()
+            ||binding.userAge.text.toString().isEmpty()
+            ||binding.userGender.text.toString().isEmpty()
+            ||binding.star.text.toString().isEmpty()
+            ||binding.status.text.toString().isEmpty()
+        ){
+            Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show()
+
+
+        }else{
+            signUp()
         }
     }
 
@@ -57,8 +79,10 @@ class registration : AppCompatActivity() {
             Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show()
 
         }else{
-           // uploadImage()
-            signUp()
+
+            binding.primaryInformation.visibility= View.GONE
+            binding.secondaryInformation.visibility = View.VISIBLE
+
         }
 
     }
@@ -127,6 +151,17 @@ class registration : AppCompatActivity() {
                 email = binding.userEmail.text.toString(),
                 uid =
                 it.uid
+                ,
+                relationshipStatus = binding.status.text.toString(),
+                number = binding.userNumber.text.toString(),
+                age = binding.userAge.text.toString(),
+                gender = binding.userGender.text.toString(),
+                star = binding.star.text.toString(),
+                status = binding.status.text.toString(),
+
+
+
+
 
 
             )
