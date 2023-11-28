@@ -8,5 +8,9 @@
 
 
 
-    <style name="Theme.Date_Now" parent="Base.Theme.Date_Now" />
+    <style name="Theme.Date_Now" parent="Base.Theme.Date_Now">
+        <item name="colorPrimary">@color/laal</item>
+
+    </style>
+
 </resources>
