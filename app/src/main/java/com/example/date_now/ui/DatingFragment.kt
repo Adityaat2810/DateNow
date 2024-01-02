@@ -140,33 +140,60 @@ class DatingFragment : Fragment() {
 
     private lateinit var  list:ArrayList<UserModel>
 
+
+
     private fun getData() {
+        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+
+        if (currentUserUid != null) {
+            val userReference = FirebaseDatabase.getInstance().getReference("users")
+                .child(currentUserUid)
+
+            userReference.child("gender").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // Retrieve the user's gender from the dataSnapshot
+                    val gender = dataSnapshot.value.toString()
+
+                    // Now, you have the gender, proceed to fetch and filter the data
+                    fetchAndFilterUsers(gender)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle errors if any
+                    Log.e("TAG", "Error getting user gender", databaseError.toException())
+                }
+            })
+        } else {
+            Log.e(TAG, "Current user is null")
+            Toast.makeText(requireContext(), "Current user is null", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun fetchAndFilterUsers(userGender: String) {
         FirebaseDatabase.getInstance().getReference("users")
-            .addValueEventListener(object :ValueEventListener{
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    Log.d("adi","onDataChanged;${snapshot.toString()}")
+                    // Filter the list based on gender
+                    val filteredList = ArrayList<UserModel>()
 
-                    list = ArrayList()  // Initialize the list here
-
-                    if(snapshot.exists()){
-
-                        for(data in snapshot.children){
-
+                    if (snapshot.exists()) {
+                        for (data in snapshot.children) {
                             val model = data.getValue(UserModel::class.java)
-                            list.add(model!!)
-
+                            if (model?.gender?.toLowerCase() != userGender.toLowerCase()) {
+                                filteredList.add(model!!)
+                            }
                         }
 
+                        // Shuffle the filtered list to generate a random sequence every time
+                        filteredList.shuffle()
 
-                        // to generate random sequence every time
-                        list.shuffle()
+                        // Initialize card stack and set up recycler view here
                         inita()
 
                         binding.cardStackView.layoutManager = manager
-                        binding.cardStackView.itemAnimator=DefaultItemAnimator()
-                        binding.cardStackView.adapter =DatingAdapter(requireContext(),list)
-
-                    }else{
+                        binding.cardStackView.itemAnimator = DefaultItemAnimator()
+                        binding.cardStackView.adapter = DatingAdapter(requireContext(), filteredList)
+                    } else {
                         Toast.makeText(requireContext(), "something went wrong", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -174,9 +201,12 @@ class DatingFragment : Fragment() {
                 override fun onCancelled(error: DatabaseError) {
                     Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
                 }
-
             })
     }
+
+
+
+
 
 
 }
